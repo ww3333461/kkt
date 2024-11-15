@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KT卡密售卖平台</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #1a73e8;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #f4f4f9;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        nav a {
+            margin: 0 15px;
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 500px;
+            padding: 20px;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #34a853;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn:hover {
+            background-color: #0f9d58;
+        }
+        /* 弹窗样式 */
+        .modal, .nav-modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content, .nav-content {
+            background-color: #f4f4f9;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            transform: scale(0.7);
+            opacity: 0;
+            animation: popUp 0.3s forwards;
+        }
+        /* 图片样式 */
+        .modal img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        /* 闪烁文字样式 */
+        .flash-text {
+            color: #fbbc05;
+            font-weight: bold;
+            font-size: 18px;
+            animation: flash 1s infinite;
+        }
+        @keyframes flash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        /* 弹出动画效果 */
+        @keyframes popUp {
+            from {
+                transform: scale(0.7);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        /* 底部样式 */
+        footer {
+            background-color: rgba(128, 128, 128, 0.15); /* 更淡的透明灰色 */
+            color: #333;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>KT 卡密售卖平台</h1>
+        <p>欢迎来到三角洲行动游戏辅助售卖平台</p>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav>
+        <a onclick="showNavModal('about')">关于我们</a>
+        <a onclick="showNavModal('help')">帮助中心</a>
+        <a onclick="showNavModal('contact')">联系我们</a>
+    </nav>
+
+    <main>
+        <!-- 首页 -->
+        <section id="home">
+            <div class="card">
+                <h2>KT 卡密 - 最佳游戏辅助</h2>
+                <p>价格：26.6 元人民币</p>
+                <div class="btn" onclick="showModal()">立即购买</div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 购买弹窗 -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <img src="/storage/emulated/0/KT/Image_35438202919957.jpg" alt="支付宝二维码">
+            <p class="flash-text">推荐使用支付宝支付！</p>
+            <button class="btn" onclick="hideModal()">关闭</button>
+        </div>
+    </div>
+
+    <!-- 导航弹窗 -->
+    <div id="nav-modal" class="nav-modal">
+        <div class="nav-content" id="nav-content">
+            <p id="nav-text"></p>
+            <button class="btn" onclick="hideNavModal()">关闭</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 KT 卡密售卖平台 | 提供最专业的三角洲行动辅助服务</p>
+    </footer>
+
+    <script>
+        // 显示购买弹窗
+        function showModal() {
+            document.getElementById("modal").style.display = "block";
+        }
+
+        // 隐藏购买弹窗
+        function hideModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+        // 显示导航弹窗
+        function showNavModal(type) {
+            const navModal = document.getElementById("nav-modal");
+            const navText = document.getElementById("nav-text");
+
+            if (type === 'about') {
+                navText.innerHTML = "<strong>关于我们：</strong><br>KT卡密平台提供高质量的三角洲行动游戏辅助服务。
+                因为专注，所以专业";
+            } else if (type === 'help') {
+                navText.innerHTML = "<strong>帮助中心：</strong><br>有任何问题，请联系我们的客服QQ3460019823以获得支持。";
+            } else if (type === 'contact') {
+                navText.innerHTML = "<strong>联系我们：</strong><br>邮箱：3460019823@qq.com<br>";
+            }
+
+            navModal.style.display = "block";
+        }
+
+        // 隐藏导航弹窗
+        function hideNavModal() {
+            document.getElementById("nav-modal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
